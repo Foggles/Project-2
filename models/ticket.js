@@ -44,8 +44,8 @@ module.exports = function(sequelize, DataTypes) {
       },
     });
   };
- // Associating user with ticket
-    // When user is deleted, also delete any associated ticket
+//  Associating user with ticket
+//     When user is deleted, also delete any associated ticket
   // User.associate = (models) => {
   //   User.hasMany(models.Ticket, {
   //     onDelete: 'cascade',
