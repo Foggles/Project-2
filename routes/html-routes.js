@@ -65,13 +65,13 @@ module.exports = function (app) {
 
   app.get('/volunteer', accessibleRole(['volunteer']), (req, res) => {
 
-    res.send("HIII");
+    // res.send("HIII");
 
   });
 
   app.get('/customer',  accessibleRole(['customer']), (req, res) => {
 
-    res.send("HIII");
+    // res.send("HIII");
 
   });
 
