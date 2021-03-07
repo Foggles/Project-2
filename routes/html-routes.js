@@ -13,11 +13,15 @@ module.exports = function (app) {
 
   app.get("/signup", (req, res) => {
     if (req.user) {
+<<<<<<< HEAD
     
       return   res.render('login', {
         style: "login.css"
       })
   
+=======
+      return res.render("members");
+>>>>>>> 1376d1bbc22e2a1aa7d2fec5911c9a9c252f3324
     }
 
 
@@ -71,4 +75,33 @@ module.exports = function (app) {
 
   });
 
+<<<<<<< HEAD
+=======
+  app.post("/api/tickets", (request, response) => {
+    console.log("ticket creation route hit");
+    console.log(request.body);
+    db.Ticket.create({
+      service: request.body.service,
+      description: request.body.description,
+      postcode: request.body.postcode,
+      status: request.body.status,
+      createdById: request.body.createdById,
+      receivedUserId: request.body.receivedUserId
+    })
+    .then((ticket) => {
+      console.log("successfully created ticket");
+      response.json(ticket);
+    })
+    .catch(err => {
+      response.status(401).json(err);
+    });
+  });
+  app.get("/api/tickets", (request, response) => {
+    db.Ticket.findAll()
+      .then((tickets) => {
+          response.json(tickets);
+      }) 
+  });
+
+>>>>>>> 1376d1bbc22e2a1aa7d2fec5911c9a9c252f3324
 };
