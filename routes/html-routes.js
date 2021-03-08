@@ -90,7 +90,7 @@ module.exports = function (app) {
   // });
 
 
-
+// Jack's Code
   app.post("/api/tickets", (request, response) => {
     console.log("ticket creation route hit");
     console.log(request.body);
@@ -99,7 +99,8 @@ module.exports = function (app) {
       description: request.body.description,
       postcode: request.body.postcode,
       status: request.body.status,
-      createdById: request.body.createdById,
+      UserId: request.user.id,
+      // createdById: request.body.createdById,
       receivedUserId: request.body.receivedUserId
     })
     .then((ticket) => {
@@ -107,9 +108,11 @@ module.exports = function (app) {
       response.json(ticket);
     })
     .catch(err => {
+      console.log(err);
       response.status(401).json(err);
     });
   });
+// Jack's Code
   app.get("/api/tickets", (request, response) => {
     db.Ticket.findAll()
       .then((tickets) => {
