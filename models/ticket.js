@@ -1,55 +1,40 @@
+module.exports = (sequelize, DataTypes) => {
+  const Ticket = sequelize.define('Ticket', {
+    id: { 
+        autoIncrement: true, 
+        primaryKey: true, 
+        type: DataTypes.INTEGER,
+      },
+    // Giving the role model a title of type STRING
+    service: {
+        type:DataTypes.STRING,
+        allowNull:false,
+      },
 
-// Requiring bcrypt for password hashing. Using the bcryptjs version as the regular bcrypt module sometimes causes errors on Windows machines
-const bcrypt = require("bcryptjs");
-// Creating our User model
-module.exports = function(sequelize, DataTypes) {
-  const User = sequelize.define("User", {
-    // The email cannot be null, and must be a proper email before creation
-    email: {
+    description: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true
-      }
+      allowNull:false
     },
-    // The password cannot be null
-    password: {
-      type: DataTypes.STRING,
+
+    postcode: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
+    status: {
+      type: DataTypes.STRING, 
+    },
 
-    
-  });
-  // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
-  User.prototype.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
-  };
-  // Hooks are automatic methods that run during various phases of the User Model lifecycle
-  // In this case, before a User is created, we will automatically hash their password
-  User.addHook("beforeCreate", user => {
-    user.password = bcrypt.hashSync(
-      user.password,
-      bcrypt.genSaltSync(10),
-      null
-    );
   });
 
-  User.associate = (models) => {
-    // We're saying that a Post should belong to an Author
-    // A Post can't be created without an Author due to the foreign key constraint
-    User.belongsTo(models.Role, {
+  // Associating ticket with user
+  // When an ticket is deleted, also delete any associated user
+  Ticket.associate = (models)=> {   
+    Ticket.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },
     });
   };
-//  Associating user with ticket
-//     When user is deleted, also delete any associated ticket
-  // User.associate = (models) => {
-  //   User.hasMany(models.Ticket, {
-  //     onDelete: 'cascade',
-  //   });
-  // };
-  return User;
+
+  return Ticket;
 };

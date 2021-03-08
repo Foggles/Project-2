@@ -2,31 +2,52 @@ $(document).ready(() => {
     // Getting references to our form and input
     const signUpForm = $("form.signup");
     const emailInput = $("input#email-input");
-    const passwordInput = $("input#password-input");
-  
+  const passwordInput = $("input#password-input");
+  const RoleInput1 = $("input#radio-1");
+  const RoleInput2 = $("input#radio-2");
+  let RoleInput;
+
+    if ($(RoleInput1)[0].checked == true) {
+      RoleInput = "Customer"
+    } else {
+      RoleInput = "Volunteer"
+    }
+
     // When the signup button is clicked, we validate the email and password are not blank
     signUpForm.on("submit", event => {
       event.preventDefault();
       const userData = {
         email: emailInput.val().trim(),
-        password: passwordInput.val().trim()
+        password: passwordInput.val().trim(),
+        role: RoleInput
       };
-  
+
       if (!userData.email || !userData.password) {
         return;
       }
       // If we have an email and password, run the signUpUser function
-      signUpUser(userData.email, userData.password);
+      signUpUser(userData.email, userData.password, RoleInput);
       emailInput.val("");
       passwordInput.val("");
     });
-  
+
     // Does a post to the signup route. If successful, we are redirected to the members page
     // Otherwise we log any errors
     function signUpUser(email, password) {
+      const RoleInput1 = $("input#radio-1");
+      const RoleInput2 = $("input#radio-2");
+      let RoleInput;
+
+      if ($(RoleInput1)[0].checked == true) {
+        RoleInput = "Customer"
+      } else {
+        RoleInput = "Volunteer"
+      }
+      debugger;
       $.post("/api/signup", {
         email: email,
-        password: password
+        password: password,
+        role : RoleInput
       })
         .then(() => {
           window.location.replace("/members");
@@ -34,10 +55,9 @@ $(document).ready(() => {
         })
         .catch(handleLoginErr);
     }
-  
+
     function handleLoginErr(err) {
       $("#alert .msg").text(err.responseJSON);
       $("#alert").fadeIn(500);
     }
   });
-  

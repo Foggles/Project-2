@@ -1,17 +1,81 @@
 .bg{
-    background: url("https://www.qs-unisolution.com/wp-content/uploads/2020/03/iStock-1144178813-e1584981605573-700x400.jpg") no-repeat;
+    background: url("../images/img3.jpg") no-repeat;
      z-index: -1;
-     height:100vh;
+     height:500px;
      width:100%;
-     background-size:100%
+     background-size:100%;
+     padding-left:100px;
+     padding-top:30px;
+}
+.navbar {
+  padding:30px !important;
 }
 .signup{
     background: #fff;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px  #888888;
-    position:absolute;
-    top: 15vh;
+    box-shadow: 0px 0px 10px 0px  #888888; 
+    width:400px;
+    height:400px;
+    font-size:medium;
+   
+}
+.back {
+  font-size: 20px;
+}
+.logo {
+  width:200px;
+  margin:-15px;
+  height:80px;
+  
+}
+
+.social a {
+  font-size: 4.5em;
+  padding: 3rem;
+}
+.fa-facebook {
+  color: #3b5998;
+}
+.fa-twitter {
+  color: #00aced;
+}
+.fa-instagram {
+  color: #bc2a8d;
+}
+.fa-youtube {
+  color: #bb0000;
+}
+.fa-facebook:hover,
+.fa-twitter:hover,
+.fa-instagram:hover,
+.fa-youtube:hover {
+  color: #d5d5d5;
+}
+footer {
+  background-color: #3f3f3f;
+  color: #d5d5d5;
+  padding-top: 2rem;
+  /* position: absolute; */
+  bottom: 0;
+  width: 100%;
+  font-size: large;
+  font-weight: bold;
+}
+hr.light {
+  border-top: 1px solid #d5d5d5;
+  width: 75%;
+  margin-top: 0.8rem;
+  margin-bottom: 1rem;
+}
+footer a {
+  color: #d5d5d5;
+}
+hr.light-100 {
+  border-top: 1px solid #d5d5d5;
+  width: 100%;
+  margin-top: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 678px) {

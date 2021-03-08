@@ -1,18 +1,55 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark p-3">
+  <span class="navbar-brand mb-1 font-weight-bold text-"></span>
+  <a class="navbar-brand" href="/"><img src="../images/Together we can Logo.png" class="img-thumbnail logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+    <ul class="nav navbar-nav navbar-right ml-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white font-weight-bold back" href="/logout">Go Back</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <section class="container-fluid bg">
-    <div class="row justify-content-center">
-      <div class="col-12 cl-sm-6 col-md-3">
-        <form class="login">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="email-input" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password-input" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-default">Login</button>
-          <p>Or sign up <a href="/signup">here</a></p>
-        </form> 
+  <div class="row justify-content-left mb-2">
+    <div class="col-12 cl-sm-6 col-md-3">
+      <form class="login">
+        <h2>Login</h2>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="email-input" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="password-input" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p>Or sign up <a href="/signup">here</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<br />
+<section>
+  <div class="container-fluid padding text-center">
+    <div class="row jumbotron padding bg-dark">
+      <div class="col-12">
+        <h2 class="text-white">Join Us</h2>
+      </div>
+      <div class="col-12 social padding">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+{{>footer}}

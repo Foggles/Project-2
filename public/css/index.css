@@ -1,0 +1,10 @@
+.logo {
+    width:200px;
+    margin:-15px;
+    height:80px; 
+}
+
+.navbar {
+    padding:30px !important;
+    background-color: #3f3f3f !important;
+}

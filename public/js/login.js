@@ -28,8 +28,13 @@ $(document).ready(() => {
         email: email,
         password: password
       })
-        .then(() => {
-          window.location.replace("/members");
+        .then(({RoleId}) => {
+          if (RoleId === 1) {
+            window.location.replace("/volunteer");
+          } else {
+            window.location.replace("/members");
+          }
+          
           // If there's an error, log the error
         })
         .catch(err => {

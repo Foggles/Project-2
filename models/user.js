@@ -43,13 +43,8 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
       },
     });
+    User.hasMany(models.Ticket, {foreignKey: 'createdById', sourceKey: User.id});
   };
- // Associating user with ticket
-    // When user is deleted, also delete any associated ticket
-  // User.associate = (models) => {
-  //   User.hasMany(models.Ticket, {
-  //     onDelete: 'cascade',
-  //   });
-  // };
+
   return User;
 };
