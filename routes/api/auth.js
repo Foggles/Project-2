@@ -11,7 +11,8 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
+        RoleId: req.user.RoleId,
     });
 });
 
@@ -87,8 +88,8 @@ router.post("/api/signup", async (req, res) => {
 // Route for logging user out
 router.get("/logout", (req, res) => {
     req.logout();
-    // res.redirect("/");
-    res.render("index");
+    res.redirect("/login");
+    
 });
 
 module.exports = router;

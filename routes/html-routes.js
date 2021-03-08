@@ -8,20 +8,27 @@ const {accessibleRole} = require("../config/middleware/permissionMiddleware");
 
 module.exports = function (app) {
   app.get("/", (req, res) => {
-    res.render('index')
+    // res.render('index', {
+    //   style: "index.css"
+    // })
+    if (!req.user) {
+      return res.redirect("/login");
+    }
+    if (req.user.RoleId  === 1) {
+      return res.redirect("/volunteer");
+  } else {
+      return res.redirect("/members");
+  }
   });
 
   app.get("/signup", (req, res) => {
     if (req.user) {
-
-    
-      return   res.render('login', {
+      return  res.render('login', {
         style: "login.css"
       })
-  
-
-      return res.render("members");
-
+      return res.render("members", {
+        style:"members.css"
+      });
     }
 
 
@@ -48,7 +55,9 @@ module.exports = function (app) {
   app.get("/login", (req, res) => {
 
     if (req.user) {
-      res.render("members");
+      res.render("members", {
+        style:"members.css"
+      });
     }
 
     res.render('login', {
@@ -58,22 +67,28 @@ module.exports = function (app) {
   });
 
 
-  app.get("/members", isAuthenticated, (req, res) => {
-    res.render('members')
+  app.get("/members",accessibleRole(2), (req, res) => {
+    // res.render('members')
+    res.render('members', {
+      style:"members.css"
+    })
+
 
   });
 
-  app.get('/volunteer', accessibleRole(['volunteer']), (req, res) => {
 
-    // res.send("HIII");
-
+  app.get('/volunteer', accessibleRole(1), (req, res) => {
+    res.render('volunteer' , {
+      style:"volunteer.css"
+    })
   });
 
-  app.get('/customer',  accessibleRole(['customer']), (req, res) => {
+  // app.get('/customer',  accessibleRole(['customer']), (req, res) => {
 
-    // res.send("HIII");
+  //   res.render('members')
 
-  });
+  // });
+
 
 
   app.post("/api/tickets", (request, response) => {
