@@ -1,5 +1,4 @@
 const db = require('./../models');
-const nodemailer = require('nodemailer');
 const configs = require('./../config/config.json');
 
 //this add items to the window
