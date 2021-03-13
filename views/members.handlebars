@@ -1,90 +1,70 @@
+{{>header}}
 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Carousel indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#slides" data-slide-to="0" class="active"></li>
+        <li data-target="#slides" data-slide-to="1"></li>
+        <li data-target="#slides" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for carousel items -->
+    <div class="carousel-inner box text-center">
+        <div class="carousel-item active">
+            <img src="../images/img20.jpg" alt="First Slide">
+            <div class="carousel-caption">
+                <h1 class="display-2">Together We Can</h1>
+                <br>
+            </div>
+        </div>
+</div>
 
- <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
-    </div>
-  </div>
-</nav>
-    {{#if user}}
-        {{#if isCustomer}}
-            <h1>Hello, {{user}}.</h1>
-        {{^}}
-           <h1>Hello, {{user}}.</h1>
-        {{/if}}
-                {{#if isCustomer}}
-                    <div isCustomer="true" id="Essential_Service_Service" class="row m-0 p-3">
-                        <div  class="col">
-                            <h3>Essential Service</h3>
-                            <div class="row">
-                                            <div class="card" style="width: 18rem;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">help me feed the dog</h5>
-                                               
-                                                <p class="card-text">the people can help you to feed your dog.</p>
-                                                <a href="#" onclick="addConstReqs(this,
-                                                'Essential_Service_Service')" class="card-link">send Request</a>
-                                            </div>
-                                            </div>
-
-                            </div>
-                            <div id="item_unActive"  class="col" ></div>
-                            <div class="row mt-5 d-flex justify-content-end  align-items-end">
-                                <div class="col-9 ">
-                                    <label>Enter text</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                                <button onclick="add(this,'Essential_Service_Service')" style="width:120px;height:40px" class=" col-3 btn">Add</button>
-                            </div>
-                        </div>
-                        <div  class="col">
-                            <h3>Require Service</h3>
-                                <div id="item_Active"  class="col" ></div>
-
-                        </div>
-                        </div>
-                        <div id="Social_Service_Service" class="row m-0 p-3">
-                        <div  class="col">
-                            <h3>Social Service</h3>
-                             <div class="row">
-                                            <div class="card" style="width: 18rem;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">help me feed the dog 2</h5>
-                                               
-                                                <p class="card-text">the people can help you to feed your dog. 2</p>
-                                                <a href="#" onclick="addConstReqs(this,'Social_Service_Service')" class="card-link">send Request</a>
-                                            </div>
-                                            </div>
-
-                            </div>
-                            <div id="item_unActive" class="col" >
-                                <div>
-                                    <span>1 test test test testt</span>
-                                    <input style="margin-left:15px" type="checkbox">
-                                </div>
-                            </div>
-                            <div class="row mt-5 d-flex justify-content-end  align-items-end">
-                                <div class="col-9 ">
-                                    <label>Enter text</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                                <button onclick="add(this, 'Social_Service_Service')" style="width:120px;height:40px" class=" col-3 btn">Add</button>
-                            </div>
-                        </div>
-                        <div   class="col">
-                            <h3>Social Service</h3>
-                                <div id="item_Active" class="col" >
-                                    <div>
-                                        <span>1 test test test testt</span>
-                                    </div>
-                                </div>
-
+<!-- This is the essential service section-->
+        <div isCustomer="true" id="Essential_Service_Service" class="row m-0 p-3">
+            <div  class="col">
+                <h3>Essential Service</h3>
+                <div id="item_unActive"  class="col" ></div>
+                <div class="row mt-5 d-flex justify-content-end  align-items-end">
+                    <div class="col-9 ">
+                        <label>Enter text</label>
+                        <input class="form-control" type="text">
+                    </div>
+                    <button onclick="add(this,'Essential_Service_Service')" style="width:120px;height:40px" class=" col-3 btn">Add</button>
+                </div>
+            </div>
+            <!-- This is the require service section-->
+            <div  class="col">
+                <h3>Require Service</h3>
+                 <div id="item_Active"  class="col" ></div>
+            </div>
+        </div>
+        
+        <div id="Social_Service_Service" class="row m-0 p-3">
+            <div  class="col">
+                <h3>Social Service</h3>
+                <div id="item_unActive" class="col" >
+                    <div>
+                        <span>1 test test test testt</span>
+                        <input style="margin-left:15px" type="checkbox">
+                    </div>
+                </div>
+                <div class="row mt-5 d-flex justify-content-end  align-items-end">
+                    <div class="col-9 ">
+                        <label>Enter text</label>
+                        <input class="form-control" type="text">
+                    </div>
+                    <button onclick="add(this, 'Social_Service_Service')" style="width:120px;height:40px" class=" col-3 btn">Add</button>
+                </div>
+            </div>
+            <div   class="col">
+                <h3>Social Service</h3>
+                    <div id="item_Active" class="col" >
+                        <div>
+                            <span>1 test test test testt</span>
                         </div>
                     </div>
+
+            </div>
+        </div>
 
                     <table class="table p-5">
                       <thead>
@@ -104,63 +84,15 @@
 
                       </tbody>
                     </table>
-                {{^}}
-                <div isCustomer="false" id="Essential_Service_Service" class="row m-0 p-3">
-                     <div  class="col">
-                         <h3>Essential Service</h3>
-                         <div id="item_Active"  class="col" ></div>
+</div>
 
-                     </div>
-
-                     </div>
-                     <div id="Social_Service_Service" class="row m-0 p-3">
-                     <div  class="col">
-                         <h3>Social Service</h3>
-                         <div id="item_Active" class="col" >
-
-                         </div>
-
-                     </div>
-
-                 </div>
-                  <table class="table p-5">
-                                       <thead>
-                                         <tr>
-                                           <th scope="col">#</th>
-                                           <th scope="col">Task ID</th>
-                                           <th scope="col">Task Text</th>
-                                           <th scope="col">from</th>
-                                           <th scope="col">to</th>
-                                           <th scope="col">msg</th>
-                                           <th scope="col">state</th>
-                                           <th scope="col"></th>
-                                         </tr>
-                                       </thead>
-                                       <tbody id="requests_items">
-
-
-                                       </tbody>
-                                     </table>
-                {{/if}}
-            {{^}}
-            You can Go To login.
-        {{/if}}
-
-
-<script>
-       function add(el, type) {
-            console.log(type)
-       }
-
-
-
-</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <script>
+
 
 function addItem(data) {
      var el = $('#Essential_Service_Service');
@@ -187,7 +119,7 @@ function addItem(data) {
                 if ($('#Essential_Service_Service').attr('isCustomer') == "true") {
                     let newItem = `
                                     <div id="${id}">
-                                   <span>#${+i+1} - ${title}</span>
+                                   <span>#${i} - ${title}</span>
                                    <input checked style="margin-left:15px" onclick="check(this,'${id}', '${type}')" state="on" type="checkbox">
                                </div>
                     `;
@@ -196,7 +128,7 @@ function addItem(data) {
                 } else {
                  let newItem = `
                         <div id="${id}">
-                       <span>#${+i+1} - ${title}, by ${email}</span>
+                       <span>#${i} - ${title}, by ${email}</span>
                        <button onclick="sendReqs(this, '${id}', '${title}', '${email}')" class="btn btn-info">Send Request</button>
                    </div>
                                     `;
@@ -208,66 +140,24 @@ function addItem(data) {
 
         if ($('#Essential_Service_Service').attr('isCustomer') == "true") {
             let newItem = `<div id="${id}">
-                           <span>#${+i+1} - ${title}</span>
+                           <span>#${i} - ${title}</span>
                            <input style="margin-left:15px" onclick="check(this,'${id}', '${type}')" state="off" type="checkbox">
                        </div>`
                        $(el).find('#item_unActive').html($(el).find('#item_unActive').html() + newItem)
             } else {
                 let newItem = `<div id="${id}">
-                           <span>#${+i+1} - ${title}, by ${email}</span>
+                           <span>#${i} - ${title}, by ${email}</span>
                        </div>`
                        $(el).find('#item_unActive').html($(el).find('#item_unActive').html() + newItem)
             }
 
-            }
-
-
-
+        }
 
     }
 }
-function checkToggle(el, type, state) {
-
-    if (state == "off") {
-        let newCopy = $(el).parent().clone();
-        $(newCopy).find('input').attr('state', 'on')
-        $(newCopy).appendTo($(`#${type}`).find('#item_Active'))
-        $(el).parent().remove();
-    } else {
-         let newCopy =  $(el).parent().clone()
-         $(newCopy).find('input').attr('state','off')
-        $(newCopy).appendTo($(`#${type}`).find('#item_unActive'));
-        $(el).parent().remove();
-    }
-
-}
-
-function check(el, id, type) {
-let state = $(el).attr('state');
-
-        if (state == "off") {
-                  $.ajax({
-                    url : '/api/?GETreq=checkOn&id=' + id,
-                    success: function (d){
-                       d = JSON.parse(d);
-                       checkToggle(el, type, state);
 
 
-                    }
-                });
-            } else {
-                     $.ajax({
-                        url : '/api/?GETreq=checkOff&id=' + id,
-                        success: function (d){
-                           d = JSON.parse(d);
-                           checkToggle(el, type, state);
-
-
-                        }
-                    });
-                }
-
-}
+// this section add from the input box into the window
 function add(el, type) {
 
     let value = $(el).prev().find('input').val();
@@ -280,170 +170,11 @@ function add(el, type) {
 
         }
     });
-
-
 }
 
 
-function addReqs (data) {
 
-
-
-        $('#requests_items').html(' ');
-
-        for (var i in data) {
-            let {
-            id,
-            todoId,
-            todoTitle,
-            from,
-            to,
-            msg,
-            state
-            } = data[i];
-            StateList = {
-                "0" : "open",
-                "1" : "padding",
-                "2" : "finished",
-            }
-            state = StateList[state]
-            var ActiveBTN = ``;
-
-            if ($('#Essential_Service_Service').attr('isCustomer') == "true") {
-
-                if (state == "open") {
-                     ActiveBTN = `<button onclick="AcceptReqs(this, ${id})" class="btn btn-success">Accept</button>`;
-                }
-               if (state == "padding") {
-                    ActiveBTN = `<button onclick="FinishReqs(this, ${id})" class="btn btn-success">Finish</button>`;
-               }
-            }
-
-          var requests_items_html = ` <tr>
-                                         <th scope="row">${id}</th>
-                                         <td>${todoId}</td>
-                                         <td>${todoTitle}</td>
-                                         <td>${from}</td>
-                                         <td>${to}</td>
-                                         <td>${msg}</td>
-                                         <td>${state}</td>
-                                         <td>
-                                            ${ActiveBTN}
-                                            <button onclick="removeReqs(this, ${id})" class="btn btn-danger">remove</button>
-                                         </td>
-
-                                       </tr>`;
-            $('#requests_items').html($('#requests_items').html() + requests_items_html)
-
-        }
-
-}
-
-function sendReqs (el, id, title,e ) {
-$.confirm({
-    title: 'Prompt!',
-    content: '' +
-    '<form action="" class="formName">' +
-    '<div class="form-group">' +
-    '<label>Enter Your Message</label>' +
-    '<input type="text" placeholder="Your name" class="msg form-control" required />' +
-    '</div>' +
-    '</form>',
-    buttons: {
-        formSubmit: {
-            text: 'Submit',
-            btnClass: 'btn-blue',
-            action: function () {
-                var msg = this.$content.find('.msg').val();
-                if(! msg){
-                    $.alert('provide a valid Message');
-                    return false;
-                }
-                 $.ajax({
-                        url : `/api/?GETreq=sendReqs&id=${id}&title=${id}&msg=${msg}&to=${e}`,
-                        success: function (d){
-                           d = JSON.parse(d);
-                           $.alert('Thanks For Your Request');
-
-                           init(d);
-
-
-                        }
-                 });
-
-            }
-        },
-        cancel: function () {
-            //close
-        },
-    },
-    onContentReady: function () {
-        // bind to events
-        var jc = this;
-        this.$content.find('form').on('submit', function (e) {
-            // if the user submits the form by pressing enter in the field.
-            e.preventDefault();
-            jc.$$formSubmit.trigger('click'); // reference the button and click it
-        });
-    }
-});
-
-
-
-}
-
-
-function AcceptReqs(el, id) {
-$.ajax({
-            url : '/api/?GETreq=AcceptReqs&id=' + id,
-            success: function (d){
-               d = JSON.parse(d);
-               init(d);
-
-
-            }
-        });
-}
-function removeReqs (el, id) {
-$.ajax({
-            url : '/api/?GETreq=removeReqs&id=' + id,
-            success: function (d){
-               d = JSON.parse(d);
-               init(d);
-
-
-            }
-        });
-}
-
-function FinishReqs (el, id) {
-$.ajax({
-            url : '/api/?GETreq=FinishReqs&id=' + id,
-            success: function (d){
-               d = JSON.parse(d);
-               init(d);
-
-
-            }
-        });
-
-}
-
-
-function addConstReqs (el, type) { 
-
-    let value =$(el).prev().prev().html();
-
-     $.ajax({
-        url : `/api/?GETreq=addItem&title=${value}&type=${type}`,
-        success: function (d){
-           init();
-        }
-    });
-
-
-
-}
+// this section display the added items into the dom window
 
 function init()  {
 
@@ -452,11 +183,8 @@ function init()  {
             success: function (d){
                d = JSON.parse(d);
                addItem(d);
-
-
             }
         });
-
 
         $.ajax({
                    url : '/api/?GETreq=getAllMyRequest',
@@ -468,8 +196,6 @@ function init()  {
                    }
                });
        }
-
-
        init()
-</script>
 
+</script>

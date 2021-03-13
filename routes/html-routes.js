@@ -1,12 +1,15 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
 const db = require('./../models');
+const { api } = require('./api')
+
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const {accessibleRole} = require("../config/middleware/permissionMiddleware");
 
 module.exports = function (app) {
+
   app.get("/", (req, res) => {
     // res.render('index', {
     //   style: "index.css"
@@ -20,6 +23,7 @@ module.exports = function (app) {
       return res.redirect("/members");
   }
   });
+  app.get('/api', api);
 
   app.get("/signup", (req, res) => {
     if (req.user) {
@@ -90,7 +94,7 @@ module.exports = function (app) {
   // });
 
 
-
+// Jack's Code
   app.post("/api/tickets", (request, response) => {
     console.log("ticket creation route hit");
     console.log(request.body);
@@ -99,7 +103,8 @@ module.exports = function (app) {
       description: request.body.description,
       postcode: request.body.postcode,
       status: request.body.status,
-      createdById: request.body.createdById,
+      UserId: request.user.id,
+      // createdById: request.body.createdById,
       receivedUserId: request.body.receivedUserId
     })
     .then((ticket) => {
@@ -107,14 +112,16 @@ module.exports = function (app) {
       response.json(ticket);
     })
     .catch(err => {
+      console.log(err);
       response.status(401).json(err);
     });
   });
+// Jack's Code
   app.get("/api/tickets", (request, response) => {
     db.Ticket.findAll()
       .then((tickets) => {
           response.json(tickets);
-      }) 
+      })
   });
 
 
