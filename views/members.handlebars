@@ -172,6 +172,50 @@ function add(el, type) {
     });
 }
 
+function checkToggle(el, type, state) {
+
+    if (state == "off") {
+        let newCopy = $(el).parent().clone();
+        $(newCopy).find('input').attr('state', 'on')
+        $(newCopy).appendTo($(`#${type}`).find('#item_Active'))
+        $(el).parent().remove();
+    } else {
+         let newCopy =  $(el).parent().clone()
+         $(newCopy).find('input').attr('state','off')
+        $(newCopy).appendTo($(`#${type}`).find('#item_unActive'));
+        $(el).parent().remove();
+    }
+
+}
+
+
+
+function check(el, id, type) {
+let state = $(el).attr('state');
+
+        if (state == "off") {
+                  $.ajax({
+                    url : '/api/?GETreq=checkOn&id=' + id,
+                    success: function (d){
+                       d = JSON.parse(d);
+                       checkToggle(el, type, state);
+
+
+                    }
+                });
+            } else {
+                     $.ajax({
+                        url : '/api/?GETreq=checkOff&id=' + id,
+                        success: function (d){
+                           d = JSON.parse(d);
+                           checkToggle(el, type, state);
+
+
+                        }
+                    });
+                }
+
+}
 
 
 // this section display the added items into the dom window

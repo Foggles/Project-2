@@ -35,6 +35,41 @@ function addItem(req, res, title, email, type) {
   });
 }
 
+function checkState (req, res, id, state, email) {
+  db.todolist.findAll({
+    where: {
+      email: email,
+      id: id
+    }
+  }).then(async (results) => {
+    if (!results) {
+      return res.send(
+        JSON.stringify({
+          success: false,
+          msg: 'we can\'t add item, right now, come later'
+        })
+      )
+    } else {
+      db.todolist.update({
+        checked: state
+      }, {
+        where: {
+          email: email,
+          id: id
+        }
+      }).then((v) => {
+        return res.send(
+          JSON.stringify({
+            success: true,
+            msg: 'updated the item'
+          })
+        )
+      })
+    }
+  })
+}
+
+
 function getAllMyRequest(req, res, email, UserType) {
  if (UserType == 'customer') {
   db.reqs
