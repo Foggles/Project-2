@@ -16,92 +16,186 @@
                 <br>
             </div>
         </div>
-        {{!-- <div class="carousel-item">
-            <img src="../images/img20.jpeg" alt="Second Slide">
+</div>
+
+<!-- This is the essential service section-->
+        <div isCustomer="true" id="Essential_Service_Service" class="row m-0 p-3">
+            <div  class="col">
+                <h3>Essential Service</h3>
+                <div id="item_unActive"  class="col" ></div>
+                <div class="row mt-5 d-flex justify-content-end  align-items-end">
+                    <div class="col-9 ">
+                        <label>Enter text</label>
+                        <input class="form-control" type="text">
+                    </div>
+                    <button onclick="add(this,'Essential_Service_Service')" style="width:120px;height:40px" class=" col-3 btn">Add</button>
+                </div>
+            </div>
+            <!-- This is the require service section-->
+            <div  class="col">
+                <h3>Require Service</h3>
+                 <div id="item_Active"  class="col" ></div>
+            </div>
         </div>
-        <div class="carousel-item">
-            <img src="../images/img21.jpg" alt="Third Slide">
+        
+        <div id="Social_Service_Service" class="row m-0 p-3">
+            <div  class="col">
+                <h3>Social Service</h3>
+                <div id="item_unActive" class="col" >
+                    <div>
+                        <span>1 test test test testt</span>
+                        <input style="margin-left:15px" type="checkbox">
+                    </div>
+                </div>
+                <div class="row mt-5 d-flex justify-content-end  align-items-end">
+                    <div class="col-9 ">
+                        <label>Enter text</label>
+                        <input class="form-control" type="text">
+                    </div>
+                    <button onclick="add(this, 'Social_Service_Service')" style="width:120px;height:40px" class=" col-3 btn">Add</button>
+                </div>
+            </div>
+            <div   class="col">
+                <h3>Social Service</h3>
+                    <div id="item_Active" class="col" >
+                        <div>
+                            <span>1 test test test testt</span>
+                        </div>
+                    </div>
+
+            </div>
         </div>
-    </div> --}}
-    <!-- Carousel controls -->
-    {{!-- <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-        <span class="carousel-control-prev-icon text-primary"></span>
-    </a>
-    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-        <span class="carousel-control-next-icon text-primary"></span>
-    </a> --}}
+
+                    <table class="table p-5">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Task ID</th>
+                          <th scope="col">Task Text</th>
+                          <th scope="col">from</th>
+                          <th scope="col">to</th>
+                          <th scope="col">msg</th>
+                          <th scope="col">state</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody id="requests_items">
+
+
+                      </tbody>
+                    </table>
 </div>
 
- <!-- Essential Services  -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
-<div id="Essential_Service_Service" class="row m-0 p-3">
-  <div class="col">
-    <h3>Essential Service</h3>
-    <div id="item_unActive" class="col"></div>
-    <div class="row mt-5 d-flex justify-content-end  align-items-end">
-      <div class="col-9 ">
-        <label>Enter text</label>
-        <input class="form-control" type="text">
-      </div>
-      <button onclick="add(this,'Essential_Service_Service')" style="width:120px;height:40px"
-        class=" col-3 btn">Add</button>
-    </div>
-  </div>
-  <div class="col">
-    <h3>Require Service</h3>
-    <div id="item_Active" class="col"></div>
+<script>
 
-  </div>
-</div>
-<div id="Social_Service_Service" class="row m-0 p-3">
-  <div class="col">
-    <h3>Social Service</h3>
-    <div id="item_unActive" class="col">
-      <div>
-        <button id="ticketServiceBtn">1 test test test testt</button>
-        <input style="margin-left:15px" type="checkbox">
-      </div>
-    </div>
-    <div class="row mt-5 d-flex justify-content-end  align-items-end">
-      <div class="col-9 ">
-        <label>Enter text</label>
-        <input class="form-control" type="text">
-      </div>
-      <button onclick="add(this, 'Social_Service_Service')" style="width:120px;height:40px"
-        class=" col-3 btn">Add</button>
-    </div>
-  </div>
-  <div class="col">
-    <h3>Social Service</h3>
-    <div id="item_Active" class="col">
-      <div>
-        <span>1 test test test testt</span>
-      </div>
-    </div>
 
-  </div>
-</div>
+function addItem(data) {
+     var el = $('#Essential_Service_Service');
+     $(el).find('#item_Active').html('')
+     $(el).find('#item_unActive').html('')
 
-<!-- Trigger/Open The Modal -->
-<button id="testModalBtn">Open Modal</button>
 
-<!-- The Modal -->
-<div id="ticketModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form id="ticketCreate">
-      <label for="serviceName">Service</label>
-      <input type="text" id="serviceName">
+      var el = $('#Social_Service_Service');
+          $(el).find('#item_Active').html('')
+          $(el).find('#item_unActive').html('')
 
-      <label for="description">Description</label>
-      <input type="text" id="description">
 
-      <label for="postcode">Postcode</label>
-      <input type="text" id="postcode">
+    for (var i in data) {
+        // data has two type [Essential_Service_Service, Social_Service_Service]
+        // each one of them has two type one is active and one is not active
+        let {checked,
+         email,
+         id,
+         title,
+         type} = data[i];
+         console.log(data[i])
+            let el = $(`#${type}`);
+            if (checked == "true") {
+                if ($('#Essential_Service_Service').attr('isCustomer') == "true") {
+                    let newItem = `
+                                    <div id="${id}">
+                                   <span>#${i} - ${title}</span>
+                                   <input checked style="margin-left:15px" onclick="check(this,'${id}', '${type}')" state="on" type="checkbox">
+                               </div>
+                    `;
+                                    $(el).find('#item_Active').html($(el).find('#item_Active').html() + newItem)
 
-      <button type="submit">Create Ticket</button>
-    </form>
-  </div>
+                } else {
+                 let newItem = `
+                        <div id="${id}">
+                       <span>#${i} - ${title}, by ${email}</span>
+                       <button onclick="sendReqs(this, '${id}', '${title}', '${email}')" class="btn btn-info">Send Request</button>
+                   </div>
+                                    `;
 
-</div>
+                $(el).find('#item_Active').html($(el).find('#item_Active').html() + newItem)
+                }
+
+            } else {
+
+        if ($('#Essential_Service_Service').attr('isCustomer') == "true") {
+            let newItem = `<div id="${id}">
+                           <span>#${i} - ${title}</span>
+                           <input style="margin-left:15px" onclick="check(this,'${id}', '${type}')" state="off" type="checkbox">
+                       </div>`
+                       $(el).find('#item_unActive').html($(el).find('#item_unActive').html() + newItem)
+            } else {
+                let newItem = `<div id="${id}">
+                           <span>#${i} - ${title}, by ${email}</span>
+                       </div>`
+                       $(el).find('#item_unActive').html($(el).find('#item_unActive').html() + newItem)
+            }
+
+        }
+
+    }
+}
+
+
+// this section add from the input box into the window
+function add(el, type) {
+
+    let value = $(el).prev().find('input').val();
+     $.ajax({
+        url : `/api/?GETreq=addItem&title=${value}&type=${type}`,
+        success: function (d){
+           init();
+           $(el).prev().find('input').val('');
+
+
+        }
+    });
+}
+
+
+
+// this section display the added items into the dom window
+
+function init()  {
+
+        $.ajax({
+            url : '/api/?GETreq=getAllMyItems',
+            success: function (d){
+               d = JSON.parse(d);
+               addItem(d);
+            }
+        });
+
+        $.ajax({
+                   url : '/api/?GETreq=getAllMyRequest',
+                   success: function (d){
+                      d = JSON.parse(d);
+                      addReqs(d);
+
+
+                   }
+               });
+       }
+       init()
+
+</script>

@@ -9,6 +9,22 @@ const router = express.Router();
 // Otherwise the user will be sent an error
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
+    // console.log('user role id', req.user.RoleId)
+    db.Role.findOne({
+        where: {
+            id: req.user.RoleId,
+        }
+    }).then(data => {
+        // console.log('user role id2', data.get('title'))
+
+        req.session.user = req.user.email;
+        // console.log('d', req.user.email)
+        req.session.type = data.get('title');
+        // console.log('session', req.session)
+        // console.log('title', data.get('title'))
+        req.session.save();
+    });
+
     res.json({
         email: req.user.email,
         id: req.user.id,
@@ -89,7 +105,7 @@ router.post("/api/signup", async (req, res) => {
 router.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/login");
-    
+
 });
 
 module.exports = router;

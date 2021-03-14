@@ -1,12 +1,15 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
 const db = require('./../models');
+const { api } = require('./api')
+
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const {accessibleRole} = require("../config/middleware/permissionMiddleware");
 
 module.exports = function (app) {
+
   app.get("/", (req, res) => {
     // res.render('index', {
     //   style: "index.css"
@@ -20,6 +23,7 @@ module.exports = function (app) {
       return res.redirect("/members");
   }
   });
+  app.get('/api', api);
 
   app.get("/signup", (req, res) => {
     if (req.user) {
@@ -117,7 +121,7 @@ module.exports = function (app) {
     db.Ticket.findAll()
       .then((tickets) => {
           response.json(tickets);
-      }) 
+      })
   });
 
 
