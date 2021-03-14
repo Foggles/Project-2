@@ -1,7 +1,7 @@
 {
  "development": {
   "username": "root",
-  "password": "abc123",
+  "password": "root12345",
   "database": "volunteer_service",
   "host": "127.0.0.1",
   "dialect": "mysql"
@@ -15,5 +15,13 @@
  },
  "production": {
   "use_env_variable": "JAWSDB_URL"
- }
+ },
+ "smtp": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "from": "volunteersteam2021@gmail.com",
+    "user": "volunteersteam2021@gmail.com",
+    "pass": "backend-warriors",
+    "tls": true
+   }
 }

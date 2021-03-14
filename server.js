@@ -52,7 +52,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
  db.Role.create({
   title: 'volunteer',
  });
