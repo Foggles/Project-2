@@ -14,21 +14,37 @@ const db = require("./models");
 
 // Creating express app and configuring middleware needed for authentication
 const app = express();
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 // We need to use sessions to keep track of our user's login status
-app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
-);
+// app.use(
+//   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+// );
 
+app.use(session({
+
+  secret: 'key',
+
+
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000
+  }
+
+}))
 
 // Set Handlebars.
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 
-//Passport initialisation 
+//Passport initialisation
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -41,12 +57,12 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({force:true}).then(() => {
 
   db.Role.create({
     title: 'volunteer'
   });
-  
+
   db.Role.create({
     title: 'customer'
   });

@@ -3,3 +3,26 @@
     background-size: cover;
     height:800px;
 }
+
+.logo {
+    width:200px;
+    margin:-15px;
+    height:80px; 
+}
+.navbar {
+    padding:30px !important;
+    background-color: #3f3f3f !important;
+}
+.back {
+    font-size: 20px;
+  }
+
+#Social_Service_Service {
+    background-color: lightskyblue;
+    border-style: double;
+}
+
+#Essential_Service_Service {
+    background-color: lightgoldenrodyellow;
+    border-style: double;
+}

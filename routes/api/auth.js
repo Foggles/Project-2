@@ -9,6 +9,22 @@ const router = express.Router();
 // Otherwise the user will be sent an error
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
+    // console.log('user role id', req.user.RoleId)
+    db.Role.findOne({
+        where: {
+            id: req.user.RoleId,
+        }
+    }).then(data => {
+        // console.log('user role id2', data.get('title'))
+
+        req.session.user = req.user.email;
+        // console.log('d', req.user.email)
+        req.session.type = data.get('title');
+        // console.log('session', req.session)
+        // console.log('title', data.get('title'))
+        req.session.save();
+    });
+
     res.json({
         email: req.user.email,
         id: req.user.id,
@@ -85,11 +101,44 @@ router.post("/api/signup", async (req, res) => {
 })
 
 
+////////////////
+
+router.post("/api/contact", async (req, res) => {
+    db.User.create({
+        Name: req.body.Name,
+        Message: req.body.Message,
+        Phone: req.body.Phone,
+        Email: req.body.Email,
+    }).then(() => {
+        res.json({
+            data: {
+                success: true,
+            }
+        })
+    })
+        .catch(err => {
+            res.status(500).json(err);
+        });
+})
+
+
 // Route for logging user out
 router.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/login");
-    
+
 });
+// router.get("/about", (req, res) => {
+//     // res.render('about');
+//     res.render('about',{
+//         style: "about.css"
+//       });
+// });
+router.get("/about", (req,res)=> {
+    res.render('about',{
+      style: "about.css"
+    })
+  });
+
 
 module.exports = router;
