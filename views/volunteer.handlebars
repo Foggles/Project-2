@@ -1,7 +1,5 @@
+<h3>Hello {{user}}</h3>
 
-{{>header}}
-
-<h1>This is the volunteer Page</h1>
                 <div isCustomer="false" id="Essential_Service_Service" class="row m-0 p-3">
                      <div  class="col">
                          <h3>Essential Service</h3>
@@ -20,3 +18,335 @@
                      </div>
 
                  </div>
+                  <table class="table p-5">
+                                       <thead>
+                                         <tr>
+                                           <th scope="col">#</th>
+                                           <th scope="col">Task ID</th>
+                                           <th scope="col">Task Text</th>
+                                           <th scope="col">from</th>
+                                           <th scope="col">to</th>
+                                           <th scope="col">msg</th>
+                                           <th scope="col">state</th>
+                                           <th scope="col"></th>
+                                         </tr>
+                                       </thead>
+                                       <tbody id="requests_items">
+
+
+                                       </tbody>
+                                     </table>
+
+
+
+<script>
+       function add(el, type) {
+            console.log(type)
+       }
+
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+<script>
+
+function addItem(data) {
+     var el = $('#Essential_Service_Service');
+     $(el).find('#item_Active').html('')
+     $(el).find('#item_unActive').html('')
+
+
+      var el = $('#Social_Service_Service');
+          $(el).find('#item_Active').html('')
+          $(el).find('#item_unActive').html('')
+
+
+    for (var i in data) {
+        // data has two type [Essential_Service_Service, Social_Service_Service]
+        // each one of them has two type one is active and one is not active
+        let {checked,
+         email,
+         id,
+         title,
+         type} = data[i];
+         console.log(data[i])
+            let el = $(`#${type}`);
+            if (checked == "true") {
+                if ($('#Essential_Service_Service').attr('isCustomer') == "true") {
+                    let newItem = `
+                                    <div id="${id}">
+                                   <span>#${i} - ${title}</span>
+                                   <input checked style="margin-left:15px" onclick="check(this,'${id}', '${type}')" state="on" type="checkbox">
+                               </div>
+                    `;
+                                    $(el).find('#item_Active').html($(el).find('#item_Active').html() + newItem)
+
+                } else {
+                 let newItem = `
+                        <div id="${id}">
+                       <span>#${i} - ${title}, by ${email}</span>
+                       <button onclick="sendReqs(this, '${id}', '${title}', '${email}')" class="btn btn-info">Send Request</button>
+                   </div>
+                                    `;
+
+                $(el).find('#item_Active').html($(el).find('#item_Active').html() + newItem)
+                }
+
+            } else {
+
+        if ($('#Essential_Service_Service').attr('isCustomer') == "true") {
+            let newItem = `<div id="${id}">
+                           <span>#${i} - ${title}</span>
+                           <input style="margin-left:15px" onclick="check(this,'${id}', '${type}')" state="off" type="checkbox">
+                       </div>`
+                       $(el).find('#item_unActive').html($(el).find('#item_unActive').html() + newItem)
+            } else {
+                let newItem = `<div id="${id}">
+                           <span>#${i} - ${title}, by ${email}</span>
+                       </div>`
+                       $(el).find('#item_unActive').html($(el).find('#item_unActive').html() + newItem)
+            }
+
+            }
+
+
+
+
+    }
+}
+function checkToggle(el, type, state) {
+
+    if (state == "off") {
+        let newCopy = $(el).parent().clone();
+        $(newCopy).find('input').attr('state', 'on')
+        $(newCopy).appendTo($(`#${type}`).find('#item_Active'))
+        $(el).parent().remove();
+    } else {
+         let newCopy =  $(el).parent().clone()
+         $(newCopy).find('input').attr('state','off')
+        $(newCopy).appendTo($(`#${type}`).find('#item_unActive'));
+        $(el).parent().remove();
+    }
+
+}
+
+function check(el, id, type) {
+let state = $(el).attr('state');
+
+        if (state == "off") {
+                  $.ajax({
+                    url : '/api/?GETreq=checkOn&id=' + id,
+                    success: function (d){
+                       d = JSON.parse(d);
+                       checkToggle(el, type, state);
+
+
+                    }
+                });
+            } else {
+                     $.ajax({
+                        url : '/api/?GETreq=checkOff&id=' + id,
+                        success: function (d){
+                           d = JSON.parse(d);
+                           checkToggle(el, type, state);
+
+
+                        }
+                    });
+                }
+
+}
+function add(el, type) {
+
+    let value = $(el).prev().find('input').val();
+     $.ajax({
+        url : `/api/?GETreq=addItem&title=${value}&type=${type}`,
+        success: function (d){
+           init();
+           $(el).prev().find('input').val('');
+
+
+        }
+    });
+
+
+}
+
+
+function addReqs (data) {
+
+
+
+        $('#requests_items').html(' ');
+
+        for (var i in data) {
+            let {
+            id,
+            todoId,
+            todoTitle,
+            from,
+            to,
+            msg,
+            state
+            } = data[i];
+            StateList = {
+                "0" : "open",
+                "1" : "padding",
+                "2" : "finished",
+            }
+            state = StateList[state]
+            var ActiveBTN = ``;
+
+            if ($('#Essential_Service_Service').attr('isCustomer') == "true") {
+
+                if (state == "open") {
+                     ActiveBTN = `<button onclick="AcceptReqs(this, ${id})" class="btn btn-success">Accept</button>`;
+                }
+               if (state == "padding") {
+                    ActiveBTN = `<button onclick="FinishReqs(this, ${id})" class="btn btn-success">Finish</button>`;
+               }
+            }
+
+          var requests_items_html = ` <tr>
+                                         <th scope="row">${id}</th>
+                                         <td>${todoId}</td>
+                                         <td>${todoTitle}</td>
+                                         <td>${from}</td>
+                                         <td>${to}</td>
+                                         <td>${msg}</td>
+                                         <td>${state}</td>
+                                         <td>
+                                            ${ActiveBTN}
+                                            <button onclick="removeReqs(this, ${id})" class="btn btn-danger">remove</button>
+                                         </td>
+
+                                       </tr>`;
+            $('#requests_items').html($('#requests_items').html() + requests_items_html)
+
+        }
+
+}
+
+function sendReqs (el, id, title,e ) {
+$.confirm({
+    title: 'Prompt!',
+    content: '' +
+    '<form action="" class="formName">' +
+    '<div class="form-group">' +
+    '<label>Enter Your Message</label>' +
+    '<input type="text" placeholder="Your name" class="msg form-control" required />' +
+    '</div>' +
+    '</form>',
+    buttons: {
+        formSubmit: {
+            text: 'Submit',
+            btnClass: 'btn-blue',
+            action: function () {
+                var msg = this.$content.find('.msg').val();
+                if(! msg){
+                    $.alert('provide a valid Message');
+                    return false;
+                }
+                 $.ajax({
+                        url : `/api/?GETreq=sendReqs&id=${id}&title=${title}&msg=${msg}&to=${e}`,
+                        success: function (d){
+                           d = JSON.parse(d);
+                           $.alert('Thanks For Your Request');
+
+                           init(d);
+
+
+                        }
+                 });
+
+            }
+        },
+        cancel: function () {
+            //close
+        },
+    },
+    onContentReady: function () {
+        // bind to events
+        var jc = this;
+        this.$content.find('form').on('submit', function (e) {
+            // if the user submits the form by pressing enter in the field.
+            e.preventDefault();
+            jc.$$formSubmit.trigger('click'); // reference the button and click it
+        });
+    }
+});
+
+
+
+}
+
+
+function AcceptReqs(el, id) {
+$.ajax({
+            url : '/api/?GETreq=AcceptReqs&id=' + id,
+            success: function (d){
+               d = JSON.parse(d);
+               init(d);
+
+
+            }
+        });
+}
+function removeReqs (el, id) {
+$.ajax({
+            url : '/api/?GETreq=removeReqs&id=' + id,
+            success: function (d){
+               d = JSON.parse(d);
+               init(d);
+
+
+            }
+        });
+}
+
+function FinishReqs (el, id) {
+$.ajax({
+            url : '/api/?GETreq=FinishReqs&id=' + id,
+            success: function (d){
+               d = JSON.parse(d);
+               init(d);
+
+
+            }
+        });
+
+}
+
+function init()  {
+
+        $.ajax({
+            url : '/api/?GETreq=getAllMyItems',
+            success: function (d){
+               d = JSON.parse(d);
+               addItem(d);
+
+
+            }
+        });
+
+
+
+        $.ajax({
+                   url : '/api/?GETreq=getAllMyRequest',
+                   success: function (d){
+                      d = JSON.parse(d);
+                      addReqs(d);
+
+
+                   }
+               });
+       }
+
+
+       init()
+</script>
+
