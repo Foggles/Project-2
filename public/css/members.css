@@ -4,6 +4,14 @@
     height:80px;
  
   }
+  .navbar {
+    padding:30px !important;
+    background-color: #3f3f3f !important;
+  }
+  .back {
+    font-size: 20px;
+  }
+  
 
 .carousel-inner img {
     width: 60%;
@@ -65,4 +73,14 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#Social_Service_Service {
+  background-color: lightskyblue;
+  border-style: double;
+}
+
+#Essential_Service_Service {
+  background-color: lightgoldenrodyellow;
+  border-style: double;
 }

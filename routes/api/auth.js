@@ -101,11 +101,44 @@ router.post("/api/signup", async (req, res) => {
 })
 
 
+////////////////
+
+router.post("/api/contact", async (req, res) => {
+    db.User.create({
+        Name: req.body.Name,
+        Message: req.body.Message,
+        Phone: req.body.Phone,
+        Email: req.body.Email,
+    }).then(() => {
+        res.json({
+            data: {
+                success: true,
+            }
+        })
+    })
+        .catch(err => {
+            res.status(500).json(err);
+        });
+})
+
+
 // Route for logging user out
 router.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/login");
 
 });
+// router.get("/about", (req, res) => {
+//     // res.render('about');
+//     res.render('about',{
+//         style: "about.css"
+//       });
+// });
+router.get("/about", (req,res)=> {
+    res.render('about',{
+      style: "about.css"
+    })
+  });
+
 
 module.exports = router;

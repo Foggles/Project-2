@@ -19,7 +19,7 @@
     width:400px;
     font-size:medium;
     height:300px;
-    margin-top: -30px;
+    margin-top: -15px;
  
   }
 .logo {
@@ -35,6 +35,9 @@
 }
 .back {
   font-size: 20px;
+}
+.lead {
+  font-weight: bold !important;
 }
 
 

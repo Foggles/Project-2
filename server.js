@@ -22,19 +22,20 @@ app.use(express.static('public'));
 //   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
 // );
 
-// this creates a session for the project for saving the data local storage
-app.use(
- session({
+app.use(session({
+
   secret: 'key',
+
+
   resave: false,
   saveUninitialized: true,
   cookie: {
-   secure: false,
-   httpOnly: true,
-   maxAge: 24 * 60 * 60 * 1000,
-  },
- })
-);
+    secure: false,
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000
+  }
+
+}))
 
 // Set Handlebars.
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -76,10 +77,23 @@ transporter.sendMail(mailOptions, function(err,data){
 });
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync({ force: false }).then(() => {
- //db.Role.create({
-  //title: 'volunteer',
- //});
+db.sequelize.sync({force:true}).then(() => {
+
+  db.Role.create({
+    title: 'volunteer'
+  });
+
+  db.Role.create({
+    title: 'customer'
+  });
+  app.listen(PORT, () => {
+    console.log(
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      PORT,
+      PORT
+    );
+  });
+})
 
  //db.Role.create({
   //title: 'customer',
