@@ -53,39 +53,17 @@ app.use(apiRouter);
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-//configuring the emmail service
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'volunteersteam2021@gmail.com',
-        pass: 'backend-warriors'
-    }
-});
-
-let mailOptions ={
-    from: '',
-    to: 'volunteersteam2021@gmail.com',
-    subject: 'I need help please',
-    text: 'It works'
-};
-transporter.sendMail(mailOptions, function(err,data){
-    if (err) {
-        console.log('Error occurs');
-    }else {
-        console.log('Email sent!!');
-    }
-});
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync({force:false}).then(() => {
+db.sequelize.sync({force:true}).then(() => {
 
-  // db.Role.create({
-  //   title: 'volunteer'
-  // });
+  db.Role.create({
+    title: 'volunteer'
+  });
 
-  // db.Role.create({
-  //   title: 'customer'
-  // });
+  db.Role.create({
+    title: 'customer'
+  });
   app.listen(PORT, () => {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
