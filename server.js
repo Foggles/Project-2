@@ -93,12 +93,4 @@ db.sequelize.sync({force:true}).then(() => {
       PORT
     );
   });
-})
-
- //db.Role.create({
-  //title: 'customer',
- //});
- app.listen(PORT, () => {
-  console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORT, PORT);
- });
 });
