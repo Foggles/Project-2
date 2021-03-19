@@ -1,8 +1,9 @@
 {
  "development": {
   "username": "root",
-  "password": "abc123",
-  "database": "volunteer_service",
+
+  "password": "12345",
+  "database": "project2_db",
   "host": "127.0.0.1",
   "dialect": "mysql",
   "mailUser": "",
