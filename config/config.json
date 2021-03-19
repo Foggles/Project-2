@@ -1,12 +1,13 @@
 {
  "development": {
   "username": "root",
+
   "password": "12345",
   "database": "project2_db",
   "host": "127.0.0.1",
   "dialect": "mysql",
-  "mailUser": "volunteersteam2021@gmail.com",
-  "mailPass": "backend-warriors",
+  "mailUser": "",
+  "mailPass": "",
   "mailHost": "smtp.gmail.com"
  },
  "test": {
